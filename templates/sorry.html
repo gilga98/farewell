@@ -1,0 +1,89 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="text-center jumbotron" style="background-color: #ccff90;margin-bottom: 0;">
+    <h2>Sorry</h2>
+    <br/>
+    <h5>4 years , 64 subjects , 128 internals and countless chunks of memories made. In between all these,
+    ,if you feel someone deserves your apology for however small a reason , Sorry is the
+    platform for you.</h5>
+<br/>
+
+    <div class="text-center card-deck" style="background: space;">
+        {% for sorry in sorries %}
+        <div class="card animated flipInX">
+  <div class="card-body">
+    <h4 class="card-title text-center">{{ sorry.name }}</h4>
+      <h6 class="text-center">to</h6>
+      <h4 class="card-title text-center">{{ sorry.to }}</h4>
+    <p class="card-text text-center">{{ sorry.sorry }}</p>
+
+  </div>
+</div>
+{% endfor %}
+
+    </div>
+<br/>
+
+
+    <!--modal-->
+    <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#sorrymodal">
+  Have An Apology To Make?
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="sorrymodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Your Apology</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       <div>
+            {% if not your_sorry %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="sf">Your Name:</label>
+            <input type="text" name="sorry_from" id="sf" class="form-control"/>
+        </div>
+
+          <div class="form-group">
+            <label for="st">Apology recipient:</label>
+              <input type="text" name="sorry_to" id="st" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="s">Description</label>
+            <textarea id="s" name="sorry_desc" placeholder="I am sorry..." class="form-control"></textarea>
+        </div>
+
+    <button class="btn btn-warning" type="submit">Submit</button>
+    </form>
+    {% endif %}
+       </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+    <!--modal-->
+
+
+
+
+
+
+</div>
+{% endblock %}

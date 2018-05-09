@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="text-center jumbotron" style="background-color:#ffe57f  ;margin-bottom: 0;">
+    <h2>Gotcha </h2>
+    <br/>
+    <h5>Write a secret you know about anyone in the hall and leave the rest to us  ;) </h5>
+
+<br/>
+    <div class="text-center card-deck" style="background: space;">
+        {% for gotcha in all_gotchas %}
+        <div class="card animated lightSpeedIn">
+  <div class="card-body">
+    <h4 class="card-title"># {{ gotcha.sl_no }}</h4>
+    <p class="card-text">{{ gotcha.secret}}</p>
+
+  </div>
+</div>
+{% endfor %}
+
+    </div>
+<br/>
+
+
+    <!--modal-->
+    <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gotchamodal">
+  Psst! Do You Have A Secret Too?
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="gotchamodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Tell us the secret you know!</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div>
+              {% if not your_gotcha %}
+    <form method="post">
+        {% csrf_token %}
+
+
+          <div class="form-group">
+            <label for="cd">Secret:</label>
+              <textarea name="secret" id="cd" PLACEHOLDER="Text here..." class="form-control"></textarea>
+        </div>
+
+    <button class="btn btn-info" type="submit">Submit</button>
+    </form>
+    {% endif %}
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+    <!--modal-->
+
+
+
+
+
+
+</div>
+{% endblock %}

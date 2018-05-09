@@ -1,0 +1,81 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="text-center jumbotron" style="background-color: #b3e5fc;margin-bottom: 0;">
+    <h2>One Question Please</h2>
+    <br/>
+    <h5>One Question Please allows you to express that lasting doubt about that weired person , you've
+    had since eternity.</h5>
+<br/>
+
+    <div class="text-center card-deck" style="background: space;">
+        {% for q in oqps %}
+        <div class="card animated fadeIn">
+  <div class="card-body">
+    <h4 class="card-title text-center">{{ q.recipient }}</h4>
+    <p class="card-text text-center">{{ q.question }}</p>
+
+  </div>
+</div>
+{% endfor %}
+
+    </div>
+<br/>
+
+    <!--modal-->
+    <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#oqpModal">
+  Do you have a question?
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="oqpModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Your Question</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+         <div >
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="qto">Question To?:</label>
+            <input type="text" name="questo" id="qto" class="form-control"/>
+        </div>
+
+          <div class="form-group">
+            <label for="qq">Your Question</label>
+              <input type="text" name="onequestion" id="qq" class="form-control">
+        </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+            </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+    <!--modal-->
+
+
+        {% if not your_question %}
+
+    {% endif %}
+
+
+
+
+</div>
+{% endblock %}

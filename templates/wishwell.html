@@ -1,0 +1,82 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="text-center jumbotron" style="background-color:#ff8a80;margin-bottom: 0;">
+    <h2>Wishing Well </h2>
+    <br/>
+    <h5>Have a crush on someone and too shy to express it? Ever dreamt about how your ideal partner should be?
+    Try out Wishing Well to convey your romanticism.</h5>
+<br/>
+
+    <div class="text-center card-deck" style="background: space;">
+        {% for wish in wishes %}
+        <div class="card animated bounceIn">
+  <div class="card-body">
+    <h4 class="card-title text-center">{{ wish.name }}</h4>
+    <p class="card-text text-center">{{ wish.crush_desc }}</p>
+
+  </div>
+</div>
+{% endfor %}
+
+    </div>
+<br/>
+
+
+
+    <!--modal-->
+    <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#crushmodal">
+ Dreamt Of Your Cinderella/Prince Charming?
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="crushmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Your Crush</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       <div>
+             {% if not your_wish %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="wn">Your Name:</label>
+            <input type="text" name="wisher_name" id="wn" class="form-control"/>
+        </div>
+
+          <div class="form-group">
+            <label for="cd">Your Dream Crush:</label>
+              <textarea name="crush_desc" id="cd" PLACEHOLDER="Text here..." class="form-control"></textarea>
+        </div>
+
+    <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+    {% endif %}
+       </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+    <!--modal-->
+
+
+
+
+
+
+</div>
+{% endblock %}

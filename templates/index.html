@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farewell</title>
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+
+    <style>
+        .nav-item{
+            margin-right: 10px;
+
+        }
+        .white-text{
+            color: white;
+        }
+        .white-text:hover{
+            color: navajowhite;
+        }
+
+        .navbar-toggler{
+            background-color: #c0ca33;
+        }
+        .navbar-toggler-icon{
+            background-color: #827717;
+            border-radius: 50px;
+            border-width: 5px;
+            border-color: #eeff41;
+            border-style: solid;
+            animation-duration: 3s !important;
+        }
+
+        .card{
+            box-shadow: 7px 7px 7px grey;
+        }
+
+            h2{
+                color:darkred;
+                text-shadow: 3px 3px 3px yellowgreen;
+                font-family: 'Orbitron', sans-serif;
+            }
+
+
+    </style>
+
+
+
+
+    </head>
+
+
+
+<body id="top">
+<div class="jumbotron text-center" style="background-color: #f4ff81;margin-bottom: 0;">
+    <h1 class="display-2">Farewell</h1>
+</div>
+
+
+<!--navbar-->
+
+ <nav class="navbar navbar-expand-md" style="background-color: #827717; ">
+  <!-- Brand -->
+  <a class="navbar-brand white-text" href="{% url 'party:index' %}">Home</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon animated flipInY "></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link  btn btn-primary" href="{% url 'party:gotcha' %}">Gotcha</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link  btn btn-warning" href="{% url 'party:oqp' %}">One Question Please</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn btn-success" href="{% url 'party:ww' %}">Wishing Well</a>
+      </li>
+           <li class="nav-item">
+        <a class="nav-link  btn btn-danger" href="{% url 'party:sorry' %}">Sorry</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--navbar-->
+
+
+
+<!--Thank you seniors-->
+
+<div class="text-center jumbotron" style="background-color: #eeff41;margin-bottom: 0;">
+    <h2 >Thank You Seniors</h2>
+    <p>You never know how luck strikes you.Ever. But only after being hit by do you know about it.
+   Such was the case with us too! How lucky could anyone be to have had seniors , who treat you like siblings,
+    sooth you out of confusions, whenever you have one , shower you with priceless advices to help you walk
+        a better path? And yes we are! You guys have been everything just awesome seniors, probably the best
+        anyone could get. THANK YOU !!
+    </p>
+</div>
+<!--THnak you seniors-->
+
+
+
+
+<!--Game content here-->
+{% block content %}
+
+
+<!--FeedBack-->
+<div class="text-center jumbotron" style="background-color:#fff9c4;margin-bottom: 0;">
+    <h2 >Feedback Section</h2>
+<br/>
+    <br/>
+    <!--Carousel-->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <h1 style="padding: 20px 20px 20px 20px;">
+          -- Feedbacks --
+      </h1>
+
+    </div>
+      {% for feedback in all_feedbacks %}
+    <div class="carousel-item">
+      <h3>
+          {{ feedback.feedback }}
+      </h3>
+        <h6>{{ feedback.name }}</h6>
+    </div>
+          <br/>
+          <br/>
+      {% endfor %}
+
+  </div>
+
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+    <!--CArousel-->
+
+
+<!--modal-->
+ <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#feedback">
+  Give Feedback
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="feedback">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Feedback</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+         <div >
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="qto">Name:</label>
+            <input type="text" name="feedback_name" id="qto" class="form-control"/>
+        </div>
+
+          <div class="form-group">
+            <label for="qq">Your Question</label>
+              <textarea type="text" name="feedback" id="qq" class="form-control" placeholder="Feedback here"></textarea>
+        </div>
+
+    <button class="btn btn-info" type="submit">Submit</button>
+    </form>
+            </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--modal-->
+</div>
+
+
+
+<!--FeedBack-->
+
+{% endblock %}
+
+<!--Game content here-->
+
+
+
+
+
+
+
+<!--Footer-->
+<div class="text-center jumbotron text-light" style="background-color: #424242 ;margin-bottom: 0;">
+  <h3>
+      <a href="#top">
+      <button class="btn btn-default" type="button">^</button>
+      </a>
+  </h3>
+    <br/>
+    <br/>
+    <p>Created By <code>Ganesh Sharma</code></p>
+
+</div>
+<!--Footer-->
+</body>
+
+</html>
