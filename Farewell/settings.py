@@ -25,7 +25,7 @@ SECRET_KEY = 'nyw9v$f#+h3ze$87n8-=#p46v52%#ud7#c$kcw46&_#zg(@)&i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['senbonsakura.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
